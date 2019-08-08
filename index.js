@@ -7,7 +7,8 @@ module.exports = filepath => {
   const modules = [];
   if (!PLUGIN_REG.test(filepath)) return modules;
   try {
-    const plugin = require(filepath);
+    const module = require(filepath);
+    const plugin = module.default || module;
     for (const key in plugin) {
       if (plugin[key].package) modules.push(plugin[key].package);
     }
